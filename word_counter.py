@@ -15,13 +15,15 @@ stop_words = (
     'where', "where's", 'which', 'while', 'who', "who's", 'whom', 'why', "why's", 'with', "won't", 'would', "wouldn't",
     'www', 'you', "you'd", "you'll", "you're", "you've", 'your', 'yours', 'yourself', 'yourselves')
 
-context = "She ? walked the dog ph.d to the park and played ball with the dog When she threw the ball to the dog the dog missed the ball and ran to the other side of the park to fetch it"
+punctuation = ('!','"','#','$','%','&',"'",'(',')','*','+',',','-','.','/',':',';','<','=','>','?','@','[',']','^','_','`','{','|','}','~','\\')
+
+context = "She ? walked-p the dog ph.d \ - to the park and played ball with the dog When she threw the ball to the dog the dog missed the ball and ran to the other side of the park to fetch it"
 
 dic = {}
 
-context = context.translate(str.maketrans('', '', r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""))
 words = context.split()
 new_words = [x for x in words if x not in stop_words]
+new_words = [x for x in new_words if x not in punctuation]
 
 for each_word in new_words:
     word = each_word
