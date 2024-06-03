@@ -15,21 +15,36 @@ stop_words = (
     'where', "where's", 'which', 'while', 'who', "who's", 'whom', 'why', "why's", 'with', "won't", 'would', "wouldn't",
     'www', 'you', "you'd", "you'll", "you're", "you've", 'your', 'yours', 'yourself', 'yourselves')
 
-punctuation = ('!','"','#','$','%','&',"'",'(',')','*','+',',','-','.','/',':',';','<','=','>','?','@','[',']','^','_','`','{','|','}','~','\\')
+punctuation = (
+    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[',
+    ']',
+    '^', '_', '`', '{', '|', '}', '~', '\\')
 
-context = "She ? walked-p the dog ph.d \ - to the park and played ball with the dog When she threw the ball to the dog the dog missed the ball and ran to the other side of the park to fetch it"
+context = "With phd ph.d"
 
 dic = {}
 
-words = context.split()
-new_words = [x for x in words if x not in stop_words]
-new_words = [x for x in new_words if x not in punctuation]
 
-for each_word in new_words:
-    word = each_word
+def remove_punctuations(word):
+    for char in word:
+        if char in punctuation:
+            word = word.replace(char, '')
+    return word
+
+
+words = context.split()
+words = [x for x in words if x.lower() not in stop_words]
+
+for i in range(len(words)):
+    words[i] = remove_punctuations(words[i])
+
+for each_word in words:
+    word = each_word.lower()
     if word in dic:
         dic[word] += 1
     else:
         dic[word] = 1
 
 print(dic)
+
+
