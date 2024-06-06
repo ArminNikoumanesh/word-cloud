@@ -20,15 +20,19 @@ punctuation = (
     ']',
     '^', '_', '`', '{', '|', '}', '~', '\\')
 
-context = "With phd ph.d"
+context = ".ph.d."
 
 dic = {}
 
 
 def remove_punctuations(word):
-    for char in word:
-        if char in punctuation:
-            word = word.replace(char, '')
+    if word[0] in punctuation:
+        word = word.replace(word[0], '', 1)
+    if word[-1] in punctuation:
+        word_list = list(word)
+        del word_list[-1]
+        word = "".join(word_list)
+
     return word
 
 
@@ -46,5 +50,3 @@ for each_word in words:
         dic[word] = 1
 
 print(dic)
-
-
