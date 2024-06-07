@@ -16,16 +16,24 @@ stop_words = (
     'www', 'you', "you'd", "you'll", "you're", "you've", 'your', 'yours', 'yourself', 'yourselves')
 
 punctuation = (
-    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[',
-    ']',
+    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']',
     '^', '_', '`', '{', '|', '}', '~', '\\')
 
-context = ".ph.d."
+special_characters = ('.', '-')
+
+context = "salam sal!am Salam sal'am salam ph.d phd ph!d"
 
 dic = {}
 
 
 def remove_punctuations(word):
+    for char in word:
+        if char in punctuation:
+            word = word.replace(char, '')
+    return word
+
+
+def remove_special_punctuations(word):
     if word[0] in punctuation:
         word = word.replace(word[0], '', 1)
     if word[-1] in punctuation:
@@ -41,6 +49,7 @@ words = [x for x in words if x.lower() not in stop_words]
 
 for i in range(len(words)):
     words[i] = remove_punctuations(words[i])
+    words[i] = remove_special_punctuations(words[i])
 
 for each_word in words:
     word = each_word.lower()
