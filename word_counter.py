@@ -21,8 +21,6 @@ punctuation = (
 
 special_characters = ('.', '-')
 
-context = "salam sal!am Salam sal'am salam ph.d phd ph!d"
-
 dic = {}
 
 
@@ -44,18 +42,20 @@ def remove_special_punctuations(word):
     return word
 
 
-words = context.split()
-words = [x for x in words if x.lower() not in stop_words]
+with open('lecture.txt', 'rt') as lecture:
+    context = lecture.read()
+    words = context.split()
+    words = [x for x in words if x.lower() not in stop_words]
 
-for i in range(len(words)):
-    words[i] = remove_punctuations(words[i])
-    words[i] = remove_special_punctuations(words[i])
+    for i in range(len(words)):
+        words[i] = remove_punctuations(words[i])
+        words[i] = remove_special_punctuations(words[i])
 
-for each_word in words:
-    word = each_word.lower()
-    if word in dic:
-        dic[word] += 1
-    else:
-        dic[word] = 1
+    for each_word in words:
+        word = each_word.lower()
+        if word in dic:
+            dic[word] += 1
+        else:
+            dic[word] = 1
 
-print(dic)
+    print(dic)
