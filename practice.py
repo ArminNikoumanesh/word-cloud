@@ -92,14 +92,28 @@ print(likes2(['Peter']))
 
 
 def slice(a, b):
-    start = ord(a)
-    end = ord(b)
+    start, end = ord(a), ord(b)
     if start == end:
         return a
     else:
         return ''.join(chr(start + i) for i in range(end - start + 1))
 
 
-def slice2(a, b): start, end = ord(a), ord(b); return chr(start) + (chr(start + 1) if start != ord(b) else '')
+def slice2(a, b):
+    start, end = ord(a), ord(b)
+    return chr(start) + (chr(start + 1) if start != ord(b) else '')
 
-print(slice("A", "X"))
+
+def create_phone_number(n):
+    return "(%d%d%d) %d%d%d-%d%d%d%d" % (n[0], n[1], n[2], n[3], n[4], n[5], n[6], n[7], n[8], n[9])
+
+
+def create_phone_number2(n):
+    return "({}{}{}) {}{}{}-{}{}{}{}".format(*n)
+
+
+def array_diff(a, b):
+    return [elem for elem in a if elem not in b ]
+
+
+print(array_diff([1, 2], [1]))
